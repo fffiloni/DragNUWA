@@ -385,4 +385,9 @@ with gr.Blocks() as demo:
 
     run_button.click(DragNUWA_net.run, [first_frame_path, tracking_points, inference_batch_size, motion_bucket_id], [output_image, output_video])
 
-    demo.queue().launch(share=True, server_name="0.0.0.0", debug=True)
+    from pyngrok import ngrok, conf
+    NGROK_TOKEN = os.environ.get('NGROK_TOKEN')
+    conf.get_default().auth_token = NGROK_TOKEN
+    public_url = ngrok.connect(7861).public_url
+    print(public_url)
+    demo.queue().launch(server_port=7861, inline=False, share=False, debug=True)
