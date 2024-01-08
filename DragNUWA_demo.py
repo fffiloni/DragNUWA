@@ -371,6 +371,8 @@ with gr.Blocks() as demo:
             """)
 
     
+    tracking_points = gr.State([])
+
     image_upload_button.upload(preprocess_image, image_upload_button, [input_image, first_frame_path, tracking_points])
 
     add_drag_button.click(add_drag, tracking_points, tracking_points)
