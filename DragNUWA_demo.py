@@ -385,4 +385,4 @@ with gr.Blocks() as demo:
 
     run_button.click(DragNUWA_net.run, [first_frame_path, tracking_points, inference_batch_size, motion_bucket_id], [output_image, output_video])
 
-    demo.launch(server_name="0.0.0.0", debug=True)
+    demo.queue().launch(share=True, server_name="0.0.0.0", debug=True)
