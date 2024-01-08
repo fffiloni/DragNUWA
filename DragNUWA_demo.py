@@ -140,7 +140,7 @@ class Drag:
     def run(self, first_frame_path, tracking_points, inference_batch_size, motion_bucket_id):
         original_width, original_height=576, 320
 
-        input_all_points = tracking_points.constructor_args['value']
+        input_all_points = tracking_points.['value']
         resized_all_points = [tuple([tuple([int(e1[0]*self.width/original_width), int(e1[1]*self.height/original_height)]) for e1 in e]) for e in input_all_points]
 
         input_drag = torch.zeros(self.model_length - 1, self.height, self.width, 2)
@@ -240,15 +240,15 @@ with gr.Blocks() as demo:
         return first_frame_path, first_frame_path, gr.State([])
 
     def add_drag(tracking_points):
-        tracking_points.constructor_args['value'].append([])
+        tracking_points.['value'].append([])
         return tracking_points
     
     def delete_last_drag(tracking_points, first_frame_path):
-        tracking_points.constructor_args['value'].pop()
+        tracking_points.['value'].pop()
         transparent_background = Image.open(first_frame_path).convert('RGBA')
         w, h = transparent_background.size
         transparent_layer = np.zeros((h, w, 4))
-        for track in tracking_points.constructor_args['value']:
+        for track in tracking_points.['value']:
             if len(track) > 1:
                 for i in range(len(track)-1):
                     start_point = track[i]
@@ -268,11 +268,11 @@ with gr.Blocks() as demo:
         return tracking_points, trajectory_map
     
     def delete_last_step(tracking_points, first_frame_path):
-        tracking_points.constructor_args['value'][-1].pop()
+        tracking_points.['value'][-1].pop()
         transparent_background = Image.open(first_frame_path).convert('RGBA')
         w, h = transparent_background.size
         transparent_layer = np.zeros((h, w, 4))
-        for track in tracking_points.constructor_args['value']:
+        for track in tracking_points.['value']:
             if len(track) > 1:
                 for i in range(len(track)-1):
                     start_point = track[i]
@@ -293,12 +293,12 @@ with gr.Blocks() as demo:
     
     def add_tracking_points(tracking_points, first_frame_path, evt: gr.SelectData):  # SelectData is a subclass of EventData
         print(f"You selected {evt.value} at {evt.index} from {evt.target}")
-        tracking_points.constructor_args['value'][-1].append(evt.index)
+        tracking_points.['value'][-1].append(evt.index)
 
         transparent_background = Image.open(first_frame_path).convert('RGBA')
         w, h = transparent_background.size
         transparent_layer = np.zeros((h, w, 4))
-        for track in tracking_points.constructor_args['value']:
+        for track in tracking_points.['value']:
             if len(track) > 1:
                 for i in range(len(track)-1):
                     start_point = track[i]
