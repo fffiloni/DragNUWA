@@ -268,7 +268,7 @@ with gr.Blocks() as demo:
         return tracking_points, trajectory_map
     
     def delete_last_step(tracking_points, first_frame_path):
-        tracking_points['value'][-1].pop()
+        tracking_points['value'].pop()
         transparent_background = Image.open(first_frame_path).convert('RGBA')
         w, h = transparent_background.size
         transparent_layer = np.zeros((h, w, 4))
@@ -293,7 +293,7 @@ with gr.Blocks() as demo:
     
     def add_tracking_points(tracking_points, first_frame_path, evt: gr.SelectData):  # SelectData is a subclass of EventData
         print(f"You selected {evt.value} at {evt.index} from {evt.target}")
-        tracking_points['value'][-1].append(evt.index)
+        tracking_points['value'].append([evt.index[1], evt.index[0]])
 
         transparent_background = Image.open(first_frame_path).convert('RGBA')
         w, h = transparent_background.size
