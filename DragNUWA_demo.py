@@ -207,7 +207,7 @@ with gr.Blocks() as demo:
     🔥DragNUWA enables users to manipulate backgrounds or objects within images directly, and the model seamlessly translates these actions into **camera movements** or **object motions**, generating the corresponding video.<br>
     🔥DragNUWA 1.5 enables Stable Video Diffusion to animate an image according to specific path.<br>""")
 
-    gr.Image(label="DragNUWA", value="assets/DragNUWA1.5/Figure1.gif")
+    #gr.Image(label="DragNUWA", value="assets/DragNUWA1.5/Figure1.gif")
 
     gr.Markdown("""## Usage: <br>
                 1. Upload an image via the "Upload Image" button.<br>
