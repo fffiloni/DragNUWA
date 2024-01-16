@@ -202,7 +202,11 @@ class Drag:
 
 with gr.Blocks() as demo:
     gr.Markdown("""<h1 align="center">DragNUWA 1.5</h1><br>""")
-
+    gr.HTML("""
+    <p style="margin:12px auto;display: flex;justify-content: center;">
+        <a href="https://huggingface.co/spaces/fffiloni/DragNUWA?duplicate=true"><img src="https://huggingface.co/datasets/huggingface/badges/resolve/main/duplicate-this-space-lg.svg" alt="Duplicate this Space"></a>
+    </p>
+    """)
     gr.Markdown("""Official Gradio Demo for <a href='https://arxiv.org/abs/2308.08089'><b>DragNUWA: Fine-grained Control in Video Generation by Integrating Text, Image, and Trajectory</b></a>.<br>
     🔥DragNUWA enables users to manipulate backgrounds or objects within images directly, and the model seamlessly translates these actions into **camera movements** or **object motions**, generating the corresponding video.<br>
     🔥DragNUWA 1.5 enables Stable Video Diffusion to animate an image according to specific path.<br>""")
